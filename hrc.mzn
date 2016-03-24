@@ -162,30 +162,14 @@ constraint forall (i in Couples) (
     forall(j in 1..rpref_len[r1] where rpref[r1,j] = rpref[r2,j]) (
         let {int: h=rpref[r1,j], int: q1=hrank[h,r1], int: q2=hrank[h,r2]} in
         if q1 < q2 then
-            hosp_would_prefer2(h,q1) /\
-            hosp_would_prefer(h,q2) /\
-            coup_pos[i] > j /\
-            h != rpref[r2,coup_pos[i]] /\
-            h != rpref[r1,coup_pos[i]]
-                    -> coup_bp[i,j]
+            hosp_would_prefer2(h,q1) /\ hosp_would_prefer(h,q2)
         else
-            hosp_would_prefer(h,q1) /\
-            hosp_would_prefer2(h,q2) /\
-            coup_pos[i] > j /\
-            h != rpref[r2,coup_pos[i]] /\
-            h != rpref[r1,coup_pos[i]]
-                    -> coup_bp[i,j]
-        endif
-
-%        if q1 < q2 then
-%            hosp_would_prefer2(h,q1) /\ hosp_would_prefer(h,q2)
-%        else
-%            hosp_would_prefer(h,q1) /\ hosp_would_prefer2(h,q2)
-%        endif /\
-%        coup_pos[i] > j /\
-%        h != rpref[r2,coup_pos[i]] /\
-%        h != rpref[r1,coup_pos[i]]
-%                -> coup_bp[i,j]
+            hosp_would_prefer(h,q1) /\ hosp_would_prefer2(h,q2)
+        endif /\
+        coup_pos[i] > j /\
+        h != rpref[r2,coup_pos[i]] /\
+        h != rpref[r1,coup_pos[i]]
+                -> coup_bp[i,j]
     )
 );
 
